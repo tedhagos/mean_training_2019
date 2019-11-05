@@ -8,7 +8,11 @@ var http = require('http');
 // ware allows us write cleaner logic for handling our endpoints. We can
 // certainly still write our own routing logic, handles most of the complexity
 // involved when routing HTTP endpoints
-//
+
+const form = require('fs').readFileSync('form.html');
+
+// you have to install router and finalhandler e.g.
+// npm install -save router finalhandler body-parser
 var Router = require('router');
 var finalhandler = require('finalhandler');
 
@@ -34,12 +38,11 @@ router.use(bodyparser.urlencoded({extended:true}));
 
 // Let's setup our route for the home page. Note the syntax on how to set
 // up route, it is much simpler than our previous codes
-//
+
+
 router.get('/', (req, res)=>{
-  fs.readFile("form.html",'utf-8',(err, data) => {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.end(data);
-  });
+  res.writeHead('200', {'Content-Type': 'text/html'});
+  res.end(form);
 });
 
 
@@ -54,7 +57,13 @@ router.post('/', (req, res) => {
   console.log(req.body.lastname);
   console.log(req.body.firstname);
   console.log(req.body.email);
-  res.end("author");
+  let retval = {
+    "lastname" : req.body.lastname,
+    "firstname": req.body.firstname,
+    "email": req.body.email
+  }
+
+  res.end(JSON.stringify(retval));
 
 });
 
@@ -69,8 +78,6 @@ http.createServer((req,res) => {
   router(req, res, finalhandler(req,res));
 
 }).listen(port,()=>{
-
   console.log("%s is listening on port:%d", process.argv[1], port);
-
 });
 
