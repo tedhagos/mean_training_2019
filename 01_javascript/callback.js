@@ -1,4 +1,4 @@
-
+// Callback basics
 
 function greet(name) {
   console.log(`Hello ${name}`);
@@ -9,4 +9,4 @@ function userInput(callBack) {
   callBack(mName);
 }
 
-userInput(greet);
+userInput(greet); 
