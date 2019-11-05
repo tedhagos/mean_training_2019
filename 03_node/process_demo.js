@@ -5,6 +5,8 @@ process.argv.forEach((val, index) => {
   console.log(`number of args:  ${process.argv.length}`); 
 });
 
+
+
 /*
 
 If you run the code like this `node process_demo.js`, it will 
