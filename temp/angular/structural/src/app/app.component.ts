@@ -17,4 +17,5 @@ export class AppComponent {
     this.divHidden = !this.divHidden;
     this.buttonText = this.buttonText === 'hide'? 'show': 'hide';
   }
+
 }
