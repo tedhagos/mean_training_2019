@@ -7,6 +7,22 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'books';
+  filter = '';
+  booksCopy: any[];
+
+  constructor() {
+    this.booksCopy = this.books;
+  }
+
+  filterArray(filterVal) {
+    if (filterVal === '') {
+      this.books = this.booksCopy;
+    }
+  
+    this.books = this.books.filter((book) => {
+      return (book.name.indexOf(filterVal) !== -1);
+    });
+  }
 
   books: any[] = [
     {

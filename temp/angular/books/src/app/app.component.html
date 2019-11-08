@@ -1,19 +1,24 @@
+<div>
+  <input type="text" placeholder='filter' (keyup)='filterArray($event.target.value)'>
+</div>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Price</th>
+        <th>Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let book of books'>
+        <td>{{book.name }}</td>
+        <td>{{book.author}}</td>
+        <td>{{book.price | currency:'USD':'symbol':'1.2-2'}}</td>
+        <td>{{book.rating | numberToStars}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Author</th>
-      <th>Price</th>
-      <th>Rating</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor='let book of books'>
-      <td>{{book.name }}</td>
-      <td>{{book.author}}</td>
-      <td>{{book.price | currency:'USD':'symbol':'1.2-2'}}</td>
-      <td>{{book.rating | numberToStars}}</td>
-    </tr>
-  </tbody>
-</table>
