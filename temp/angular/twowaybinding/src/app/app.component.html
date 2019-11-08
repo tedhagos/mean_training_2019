@@ -1,0 +1,11 @@
+Uses interpolation (template syntax)
+<input type="text" [value]='name'><br>
+
+Uses both property binding and event binding
+<input type="text" (keyup)='changeName($event.target.value)' [value]='name'><br>
+
+Uses property and event binding too
+<input type="text" (keyup)='name=$event.target.value' [value]='name'><br>
+
+Uses ngModel
+<input type="text" [(ngModel)]='name'><br>

@@ -10,7 +10,7 @@ export class AppComponent {
   firstname  = "John";
   email = "johndoe@gmail.com";
 
-  favColor = "blue";
+  favColor = "red";
 
   returnSomething() {
     return "Something"

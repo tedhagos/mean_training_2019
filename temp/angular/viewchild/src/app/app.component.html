@@ -1,0 +1,25 @@
+
+<div id='person'>
+  <h1>{{ name }}</h1>
+  <p>Address : {{address}}</p>
+  <p>City: {{city}}</p>
+  <p>Region: {{region}}</p>
+  <select #mcity (change)='changeCity($event.target.value)'>
+    <option>Manila</option>
+    <option>Makati</option>
+    <option>Taguig</option>
+    <option>Mandaluyong</option>
+  </select>
+  <p></p>
+  <select #mregion (change)='changeRegion($event.target.value)'>
+    <option>I</option>
+    <option>II</option>
+    <option>III</option>
+    <option>NCR</option>
+  </select>
+</div>
+
+<div>
+  <h3>Change window title</h3>
+  <button (click)="changeTitle()">Change Window title</button>
+</div>
