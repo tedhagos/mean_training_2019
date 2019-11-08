@@ -1,0 +1,18 @@
+
+<div [hidden]='divHidden'>
+  <h1>{{title}}</h1>
+  An exercise on structural directives
+</div>
+
+<button (click)="showHide()">{{buttonText}}</button>
+
+<div *ngIf='foo'>
+  <h1>{{title}} 2nd block</h1>
+  An exercise on structural directives
+</div>
+
+<div>
+  <ul>
+    <li *ngFor='let name of names'>{{name}}</li>
+  </ul>
+</div>
