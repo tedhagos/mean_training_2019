@@ -8,11 +8,14 @@ import {MatButtonModule} from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule, MatCard} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
+import { NumtostarsPipe } from './numtostars.pipe';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BooklistComponent
+    BooklistComponent,
+    NumtostarsPipe
   ],
   imports: [
     BrowserModule,
@@ -21,7 +24,8 @@ import {MatTableModule} from '@angular/material/table';
     MatButtonModule,
     BrowserAnimationsModule,
     MatCardModule,
-    MatTableModule
+    MatTableModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
