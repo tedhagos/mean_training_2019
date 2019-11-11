@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BookService} from './book.service';
+
 
 @Component({
   selector: 'app-root',
@@ -10,10 +10,6 @@ export class AppComponent {
   title = 'frontend2';
   books:any[]
   
-  constructor(private bservice:BookService){
-    bservice.getAllBooks().subscribe((data)=> {
-      this.books = data;
-    })
-  }
+
 
 }
