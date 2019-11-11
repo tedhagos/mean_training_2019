@@ -6,8 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  
+  displayedColumns: string[] = ['name','author','price','rating'];
   title = 'books';
-  filter = '';
+  filtertext = '';
   booksCopy: any[];
 
   constructor() {
@@ -15,12 +17,13 @@ export class AppComponent {
   }
 
   filterArray(filterVal) {
+    this.filtertext = filterVal;
     if (filterVal === '') {
       this.books = this.booksCopy;
     }
   
     this.books = this.books.filter((book) => {
-      return (book.name.indexOf(filterVal) !== -1);
+      return (book.name.toLowerCase().indexOf(filterVal.toLowerCase()) !== -1);
     });
   }
 

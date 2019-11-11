@@ -1,0 +1,10 @@
+<h1>{{title}}</h1>
+
+<input type="number" placeholder="1st number" [(ngModel)]='fno'><br>
+<input type="number" placeholder="2nd number" [(ngModel)]='sno'><br>
+<button (click)='calculate()'>Calculate</button>
+
+<div class="result" *ngIf='gcf'>
+  <strong>GCF : {{gcf}}</strong><br>
+  loopcounter :  {{loopcounter}}
+</div>

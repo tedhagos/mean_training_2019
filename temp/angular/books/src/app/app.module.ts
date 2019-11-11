@@ -4,6 +4,10 @@ import { FormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NumberToStarsPipe } from './number-to-stars.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCardModule, MatCard} from '@angular/material/card';
+import {MatTableModule, MatTable} from '@angular/material/table';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -12,7 +16,11 @@ import { NumberToStarsPipe } from './number-to-stars.pipe';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatTableModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
