@@ -7,10 +7,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ThreeComponent implements OnInit {
 
-  routeParam:any;
+  routeParam:string;
 
   constructor(private aroute: ActivatedRoute,
-              private route:Router) {
+              private router:Router) {
+  }
+
+  goToTwo() {
+    this.router.navigate(['/two'])
   }
 
   ngOnInit() {
