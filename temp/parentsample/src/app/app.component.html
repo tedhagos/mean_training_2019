@@ -1,0 +1,6 @@
+<div class='parent'>
+<h1>Parent</h1>
+<h3>Data from Child: {{dataFromChild}}</h3>
+
+<app-child [starRating]=100 (onDataFromChild)='onDataReceived($event)'></app-child>
+</div>
