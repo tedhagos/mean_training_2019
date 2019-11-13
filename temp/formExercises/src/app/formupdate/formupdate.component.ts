@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ICustomer} from '../customer-settings';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-formupdate',
@@ -15,4 +16,11 @@ export class FormupdateComponent {
     ideStyle : "default white"
   }
 
+  onSubmit(form: NgForm) {
+    console.log(`in onSubmit: ${form.valid}`);
+  }
+
+  onCustNameBlur(custField) {
+    
+  }
 }

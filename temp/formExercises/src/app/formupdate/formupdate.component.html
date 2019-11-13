@@ -1,12 +1,22 @@
 
   <h2>Form Update</h2>
 
-  <form #form='ngForm' ngNativeValidate>
+  <form #form='ngForm' (ngSubmit)='onSubmit(form)'>
     <div class='form-group'>
       <label for='customerName'>Customer name</label>
-      <input type="text" id='customerName' name='customerName' class='form-control' placeholder='Customer Name' [(ngModel)]='customer.name' #classTest pattern='J.*'>
+      <input type="text" id='customerName' name='customerName' class='form-control' placeholder='Customer Name' [(ngModel)]='customer.name' #custName='ngModel' #classTest pattern='J.*' [class.field-error]='form.submitted && custName.invalid' (blur)='onCustNameBlur(custName)'>
     </div>
-    <h3>{{classTest.className}}</h3>
+    <h3>Valid : {{custName.valid}}</h3>
+    <h3>Invalid : {{custName.invalid}}</h3>
+    <h3>Untouched : {{custName.untouched}}</h3>
+    <h3>Touched : {{custName.touched}}</h3>
+    <h3>Dirty : {{custName.dirty}}</h3>
+    <h3>Pristine : {{custName.pristine}}</h3>
+
+    <div class='alert alert-danger' [hidden]='!form.submitted || custName.valid'>
+      You have to enter a valid name
+    </div>
+    <h3 style='color:orange'>{{classTest.className}}</h3>
     <div class='form-group'>
       <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="emailOffers" name='emailOffers' [(ngModel)]='customer.emailOffers'>
