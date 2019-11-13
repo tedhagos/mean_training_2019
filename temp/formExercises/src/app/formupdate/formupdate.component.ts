@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ICustomer} from '../customer-settings';
 import { NgForm } from '@angular/forms';
 
+
 @Component({
   selector: 'app-formupdate',
   templateUrl: './formupdate.component.html',
@@ -21,6 +22,7 @@ export class FormupdateComponent {
   }
 
   onCustNameBlur(custField) {
-    
+
   }
+
 }

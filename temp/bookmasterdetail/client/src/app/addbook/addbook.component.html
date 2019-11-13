@@ -1,0 +1,23 @@
+<h1>Adding a book</h1>
+
+<form #form='ngForm' (ngSubmit)='onFormSubmit(form)'>
+  <div class='form-group'>
+    <label for='name'>Book name</label>
+    <input type="text" id='name' name='name' class='form-control' placeholder='Book name' ngModel>
+  </div>
+  <div class='form-group'>
+    <label for='author'>Author</label>
+    <input type="text" id='author' name='author' class='form-control' placeholder='Author name' ngModel>
+  </div>
+  <div class='form-group'>
+    <label for='price'>Price</label>
+    <input type="text" id='price' name='price' class='form-control' placeholder='Book price' ngModel>
+  </div>
+  <div class='form-group'>
+    <label for='rating'>Rating</label>
+    <input type="text" id='rating' name='rating' class='form-control' placeholder='Book rating' ngModel>
+  </div>
+  <button class='btn btn-primary'>Add</button>
+</form>
+
+{{form.value | json}}

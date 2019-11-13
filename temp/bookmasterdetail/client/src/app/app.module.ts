@@ -6,19 +6,21 @@ import { AppComponent } from './app.component';
 import { BookmasterComponent } from './bookmaster/bookmaster.component';
 import { BookdetailComponent } from './bookdetail/bookdetail.component';
 import { HttpClientModule} from '@angular/common/http';
-
+import { AddbookComponent } from './addbook/addbook.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     BookmasterComponent,
-    BookdetailComponent
+    BookdetailComponent,
+    AddbookComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
-
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,14 +1,11 @@
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
-const bodyParser = require('body-parser')
 
 const app = express()
 app.set('port', process.env.PORT || 3000)
 
 app.use(cors())
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended:true}))
 
 const dbUrl = 'mongodb+srv://tedhagos:mongopassword@cluster0-jjekq.mongodb.net/books?retryWrites=true&w=majority'
 
@@ -40,17 +37,5 @@ app.get('/book/:id', async (req, res)=> {
   res.json(data)
 })
 
-app.post('/book', (req, res)=> {  
-  Book.save(req.body, (err, data)=> {
-    if(err) {
-      // res.sendStatus(500)
-      res.send(JSON.stringify(err))
-    }
-    else {
-      res.sendStatus(201)
-    }
-  })
-})
 
-
-app.listen(app.get('port'));
+app.listen(app.get('port'))
