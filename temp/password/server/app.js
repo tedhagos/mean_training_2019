@@ -67,8 +67,7 @@ app.post('/user', (req, res)=> {
     }
     new User(user).save()
     console.log(user)
-    res.sendStatus(201)
-
+    res.status(201).send(`welcome ${req.body.username}`)
   })
 })
 

@@ -19,11 +19,10 @@ export class BookService {
     return this.http.get(`http://localhost:3000/book/${id}`)
   }
 
-  addBook(formData):Observable<any> {
+  addBook(formData): Observable<any>{
     console.log('in addBook()')
     console.log(formData)
     return this.http.post('http://localhost:3000/book',formData)
   }
-  
 
 }
