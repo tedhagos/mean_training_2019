@@ -19,13 +19,13 @@ const dbOptions = {useNewUrlParser:true, useUnifiedTopology: true}
 
 mongoose.connect(dbUrl, dbOptions)
 
-const BookSchema  = new mongoose.Schema({
+var BookSchema  = new mongoose.Schema({
   name: String,
   author: String,
   price: Number,
   rating: Number
 })
-const Book = mongoose.model('Book', BookSchema, 'books')
+var Book = new mongoose.model('Book', BookSchema, 'books')
 
 app.get('/book', (req, res)=> {
   Book.find().lean().exec((err, data) => {
@@ -41,16 +41,12 @@ app.get('/book/:id', async (req, res)=> {
 })
 
 app.post('/book', (req, res)=> {  
-  Book.save(req.body, (err, data)=> {
-    if(err) {
-      // res.sendStatus(500)
-      res.send(JSON.stringify(err))
-    }
-    else {
-      res.sendStatus(201)
-    }
-  })
+  let book = new Book(req.body)
+  book.save()
+  console.log(req.body)
+  res.sendStatus(201)
 })
+
 
 
 app.listen(app.get('port'));
