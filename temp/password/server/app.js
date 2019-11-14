@@ -10,7 +10,6 @@ app.set('port', process.env.PORT || 3000)
 
 app.use(cors())
 app.use(bodyParser.json())
-
 app.use(bodyParser.urlencoded({extended:true}))
 
 
@@ -25,7 +24,7 @@ const UserSchema = new mongoose.Schema({
   password: String
 })
 
-let User = new mongoose.model('User', UserSchema, 'user')
+let User = new mongoose.model('User', UserSchema, 'users')
 
 app.post('/login', async (req, res)=> {
 
@@ -40,41 +39,36 @@ app.post('/login', async (req, res)=> {
 
     bcrypt.compare(password, record.password, (err, result)=> {
       if(err) {
-        res.sendStatus(404)
-        res.send('incorrect password')
+        res.status(404).send('incorrect password')
       }
       else {
-        // res.sendStatus(200)
         res.status(200).send(`welcome ${record.username}`)
       }
     })
   }
   else {
-    res.sendStatus(404)
+    res.status(404).send('user not found')
   }
   
 })
 
-app.get('/user', (req, res)=> {
-  res.sendStatus(200)
+app.get('/user', async (req, res)=> {
+  let record = await User.find({}, '-__v').lean()
+  res.status(200).json(record)
 })
 
 app.post('/user', (req, res)=> {  
 
-  let username = req.body.username
   let password = req.body.password
-
   bcrypt.hash(password, SALT_ROUNDS, (err, hash)=> {
-    
     let user = {
       username: req.body.username,
       password: hash
     }
-
     new User(user).save()
-
     console.log(user)
     res.sendStatus(201)
+
   })
 })
 
