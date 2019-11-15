@@ -28,8 +28,38 @@ const UserSchema = new mongoose.Schema({
   password: String
 })
 
+const BookSchema = new mongoose.Schema({
+  title: String,
+  author: String,
+  price: Number,
+  rating: Number
+})
+
+let Book = new mongoose.model('Book', BookSchema, 'books')
 let User = new mongoose.model('User', UserSchema, 'users')
 /////
+
+function isAuthenticated(req, res, next) {
+  console.log('in isAuthenticated')
+
+  let authToken = req.header('authorization').split(' ')[1]
+  console.log(`authToken: ${authToken}`)
+  if (authToken == 'null') {
+    console.log('no Auth')
+    res.status(403).send('no auth')
+  }
+  else {
+    let payload = jwt.decode(authToken, secret_key)
+    console.log(`token : ${JSON.stringify(payload)}`)
+    next()
+  }
+}
+
+
+app.get('/book', isAuthenticated, async (req, res) => {
+  let bookresults = await Book.find({}).lean()
+  res.status(200).send(bookresults)
+})
 
 app.get('/user', async (req, res) => {
   let allUser = await User.find({}).lean()
@@ -76,7 +106,8 @@ app.post('/login', async (req, res) => {
         let token = jwt.encode(payload, secret_key)
         console.log(`TOKEN ${token}`)
         // res.status(200).send(`welcome ${result.username}`)
-        res.status(200).send({token})
+        console.log('TOKEN: ', token)
+        res.status(200).send(token)
       }
       else {
         console.log('something else happened');

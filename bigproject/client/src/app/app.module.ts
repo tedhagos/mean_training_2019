@@ -7,8 +7,10 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ListbooksComponent } from './listbooks/listbooks.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserService } from './user.service';
+import { BookService } from './book.service';
+import { InterceptorService } from './interceptor.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,13 @@ import { UserService } from './user.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserService],
+  providers: [UserService, BookService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
