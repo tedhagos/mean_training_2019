@@ -57,5 +57,37 @@ app.post('/user', async (req, res) => {
   }
 })
 
+app.post('/login', async (req, res) => {
+  
+  let condition = {'username': req.body.username}
+  let result = await User.findOne(condition).lean()
+
+  if(result) {
+    bcrypt.compare(req.body.password, result.password, (err, data)=> {
+      if(err) {
+        res.status(500).send('exception on server')
+      }
+      else if(data) {
+        
+        // this is where we generate the token
+        let uname = req.body.username
+        let payload = {sub : uname }
+        console.log(`PAYLOAD: ${JSON.stringify(payload)}`)
+        let token = jwt.encode(payload, secret_key)
+        console.log(`TOKEN ${token}`)
+        // res.status(200).send(`welcome ${result.username}`)
+        res.status(200).send({token})
+      }
+      else {
+        console.log('something else happened');
+        res.status(403).send('password mismatch')
+      }
+    })
+  }
+  else {
+    res.status(401).send('user not found')
+  }
+})
+
 
 app.listen(app.get('port'));

@@ -10,6 +10,13 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  login(userData) {
+    this.http.post('http://localhost:3000/login', userData, this.httpOptions).subscribe(data => {
+      console.log(data)
+      localStorage.setItem('token', data.toString())
+    })
+  }
+
   register(userData) {
     this.http.post('http://localhost:3000/user', userData, this.httpOptions).subscribe(data => {
       console.log(data);
