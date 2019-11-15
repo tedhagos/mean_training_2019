@@ -3,6 +3,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const bcrypt = require('bcrypt')
+const jwt = require('jwt-simple')
 
 const SALT_ROUNDS = 10;
 const app = express()
@@ -26,6 +27,26 @@ const UserSchema = new mongoose.Schema({
 
 let User = new mongoose.model('User', UserSchema, 'users')
 
+function isAuthenticated(req, res, next) {
+  console.log('in isAuthenticated')
+  if(!req.header('authorization')) {
+    return res.status(401).send({msg: 'not authorized'})
+  }
+  else {
+    let authtoken = req.header('authorization').split(' ')[1]
+    console.log('in middleware')
+    console.log(authtoken)
+    
+    let payload = jwt.decode(authtoken, '123')
+    console.log(`PAYLOAD ${payload}`)
+    next()
+  }
+}
+
+app.get('/book', isAuthenticated, (req, res)=> {
+  res.status(200).send('a list of books')
+})
+
 app.post('/login', async (req, res)=> {
 
   let username = req.body.username
@@ -42,7 +63,14 @@ app.post('/login', async (req, res)=> {
         res.status(404).send('incorrect password')
       }
       else {
-        res.status(200).send(`welcome ${record.username}`)
+        // this is where we generate the token
+        let uname = record.token
+        let payload = {sub : uname }
+        console.log(`PAYLOAD: ${payload}`)
+        let token = jwt.encode(payload, '123')
+        console.log(`TOKEN ${token}`)
+        // res.status(200).send(`welcome ${record.username}`)
+        res.status(200).send({token})
       }
     })
   }

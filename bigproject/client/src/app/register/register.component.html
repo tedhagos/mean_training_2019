@@ -1,0 +1,11 @@
+
+<form #form='ngForm' (ngSubmit)="onSubmit(form)">
+
+  <input type="text" name="username" ngModel><br>
+  <input type="password" name="password" ngModel><br>
+  <button>Register</button>
+
+</form>
+
+<pre>{{form.value | json }}</pre>
+

@@ -11,17 +11,17 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
-import { HttpClientModule } from '@angular/common/http';
-
-
-
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { UserService } from './user.service';
+import { InterceptorService } from './interceptor.service';
+import { BookComponent } from './book/book.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +34,13 @@ import { HttpClientModule } from '@angular/common/http';
     MatCardModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [UserService, 
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+      }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

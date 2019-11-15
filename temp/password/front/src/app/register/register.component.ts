@@ -8,15 +8,14 @@ import { UserService } from '../user.service';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private userService: UserService) { }
+  constructor(private user: UserService) { }
 
   ngOnInit() {
+    
   }
 
   onRegister(form: NgForm) {
-    this.userService.registerUser(form.value).subscribe((data)=> {
-    console.log(data)
-    })
+    this.user.register(form.value)
   }
 
 }

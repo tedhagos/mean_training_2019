@@ -8,15 +8,13 @@ import { UserService } from '../user.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private userService: UserService) { }
+  constructor(private user: UserService) { }
 
   ngOnInit() {
   }
 
   onLogin(form: NgForm) {
-    this.userService.loginUser(form.value).subscribe((data)=> {
-      console.log(data)
-    })
+    this.user.login(form.value)
   }
 
 }
